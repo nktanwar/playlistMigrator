@@ -5,15 +5,13 @@ const { google } = require('googleapis');
 require('dotenv').config();
 
 const app = express();
-// Import the  migration route
-
 app.use(bodyParser.json());
 
 
 
 const oauth2Client = new google.auth.OAuth2(
-  process.env.YOUTUBE_CLIENT_ID, // Your OAuth Client ID
-  process.env.YOUTUBE_CLIENT_SECRET, // Your OAuth Client Secret
+  process.env.YOUTUBE_CLIENT_ID, //  OAuth Client ID
+  process.env.YOUTUBE_CLIENT_SECRET, //  OAuth Client Secret
   'http://localhost:3000/oauth2callback' // Redirect URL after successful login
 );
 
@@ -32,7 +30,7 @@ app.use('/api',migrateroute);
 app.get('/auth', (req, res) => {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
-    scope: ['https://www.googleapis.com/auth/youtube.force-ssl'],  // Define necessary scopes
+    scope: ['https://www.googleapis.com/auth/youtube.force-ssl'],  
   });
   res.redirect(authUrl);
 });
