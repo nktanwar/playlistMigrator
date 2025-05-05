@@ -72,7 +72,7 @@ app.get('/oauth2callback', async (req, res) => {
   const code = req.query.code;
   const { tokens } = await oauth2Client.getToken(code);  // Get tokens from Google
   oauth2Client.setCredentials(tokens);
-  console.log(tokens);
+ 
   req.session.tokens = tokens;  // Store tokens in the session
   res.redirect('https://playlist-migrator-tau.vercel.app/migration');
 });

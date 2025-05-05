@@ -91,7 +91,7 @@ router.post('/spotifyData', async (req, res) => {
         const oauth2Client = new google.auth.OAuth2(
             process.env.YOUTUBE_CLIENT_ID,
             process.env.YOUTUBE_CLIENT_SECRET,
-            'http://localhost:3000/oauth2callback'
+            'https://playlistmigrator.onrender.com/oauth2callback'
         );
 
         // Set the credentials for the OAuth2 client using the tokens stored in the session
@@ -189,7 +189,7 @@ router.post('/spotifyData/public', async (req, res) => {
         const oauth2Client = new google.auth.OAuth2(
             process.env.YOUTUBE_CLIENT_ID,
             process.env.YOUTUBE_CLIENT_SECRET,
-            'http://localhost:3000/oauth2callback'
+            'https://playlistmigrator.onrender.com/oauth2callback'
         );
 
         oauth2Client.setCredentials({
