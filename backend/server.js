@@ -67,7 +67,7 @@ app.get('/oauth2callback', async (req, res) => {
   oauth2Client.setCredentials(tokens);
   console.log(tokens);
   req.session.tokens = tokens;  // Store tokens in the session
-  res.redirect('https://playlist-migrator-tau.vercel.app/migration');
+  res.redirect('https://playlist-migrator-git-main-arcis-projects-f7feb42f.vercel.app/migration');
 });
 
 
