@@ -14,7 +14,7 @@ export default function PlaylistMigrator() {
 
     if (tokens) {
       localStorage.setItem('tokens', tokens);
-      window.location.href = 'http://localhost:3000';
+      window.location.href = 'https://playlistmigrator.onrender.com';
     } else {
       checkAuthStatus();
     }
@@ -22,7 +22,7 @@ export default function PlaylistMigrator() {
 
   const checkAuthStatus = async () => {
     try {
-      const res = await fetch('http://localhost:3000/check-auth', {
+      const res = await fetch('https://playlistmigrator.onrender.com/check-auth', {
         credentials: 'include'
       });
       const data = await res.json();
@@ -44,8 +44,8 @@ export default function PlaylistMigrator() {
     if (!playlistUrl.trim()) return alert('Please enter a valid playlist URL');
 
     const endpoint = isAuthenticated
-      ? 'http://localhost:3000/api/spotifyData'
-      : 'http://localhost:3000/api/spotifyData/public';
+      ? 'https://playlistmigrator.onrender.com/api/spotifyData'
+      : 'https://playlistmigrator.onrender.com/api/spotifyData/public';
 
     try {
       const res = await fetch(endpoint, {
@@ -73,7 +73,7 @@ export default function PlaylistMigrator() {
   };
 
   const redirectToLogin = () => {
-    window.location.href = 'http://localhost:3000/auth';
+    window.location.href = 'https://playlistmigrator.onrender.com/auth';
   };
 
   return (

@@ -29,7 +29,7 @@ connectDb();
 const oauth2Client = new google.auth.OAuth2(
   process.env.YOUTUBE_CLIENT_ID, //  OAuth Client ID
   process.env.YOUTUBE_CLIENT_SECRET, //  OAuth Client Secret
-  'http://localhost:3000/oauth2callback' // Redirect URL after successful login
+  'https://playlistmigrator.onrender.com/oauth2callback' // Redirect URL after successful login
 );
 
 app.use(session({
