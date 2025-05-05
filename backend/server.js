@@ -10,7 +10,7 @@ const cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-  origin:'http://localhost:5173',
+  origin:'https://playlist-migrator-tau.vercel.app/migration',
   credentials:true,
 }))
 async function connectDb() {
@@ -38,8 +38,8 @@ app.use(session({
   saveUninitialized:false,
   cookie: {
     httpOnly: true,
-    secure: false, // set to true only in production (HTTPS)
-    sameSite: 'lax', // or 'none' if using HTTPS
+    secure: true, // set to true only in production (HTTPS)
+    sameSite: 'none', // or 'none' if using HTTPS
   }
 }));
 
@@ -67,7 +67,7 @@ app.get('/oauth2callback', async (req, res) => {
   oauth2Client.setCredentials(tokens);
   console.log(tokens);
   req.session.tokens = tokens;  // Store tokens in the session
-  res.redirect('http://localhost:5173/migration');
+  res.redirect('https://playlist-migrator-tau.vercel.app/migration');
 });
 
 
