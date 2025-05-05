@@ -1,4 +1,4 @@
-const getSpotifyAccessToken = require("./SpotifyAccessToken");
+const getSpotifyAccessToken = require("./spotifyAccessToken");
 const axios = require('axios')
 
 
