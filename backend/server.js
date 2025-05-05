@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const { google } = require('googleapis');
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 require('dotenv').config();
 const cors = require('cors')
 
@@ -34,12 +35,18 @@ const oauth2Client = new google.auth.OAuth2(
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave:false, 
-  saveUninitialized:false,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.mongoDbKey,
+    collectionName: 'sessions', // optional, default is "sessions"
+    ttl: 60 * 60 * 24 // 1 day in seconds
+  }),
   cookie: {
     httpOnly: true,
-    secure: true, // set to true only in production (HTTPS)
-    sameSite: 'none', // or 'none' if using HTTPS
+    secure: true, // set to true in production with HTTPS
+    sameSite: 'none',
+    maxAge: 1000 * 60 * 60 * 24 // 1 day in ms
   }
 }));
 
@@ -67,7 +74,7 @@ app.get('/oauth2callback', async (req, res) => {
   oauth2Client.setCredentials(tokens);
   console.log(tokens);
   req.session.tokens = tokens;  // Store tokens in the session
-  res.redirect('https://playlist-migrator-git-main-arcis-projects-f7feb42f.vercel.app/migration');
+  res.redirect('https://playlist-migrator-tau.vercel.app/migration');
 });
 
 
