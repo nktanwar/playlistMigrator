@@ -42,25 +42,46 @@ document.getElementById('loginBtn').addEventListener('click', function () {
 });
 
 // Call the backend to migrate playlist
-function migratePlaylist() {
-    // const playlistUrl = "https://open.spotify.com/playlist/42GYU1S2TAGsG2ArZNkKgq?si=YdN-iUfvS1qivDHf6DRR4g&pi=v8Kexa1cR6uTM";
+async function  migratePlaylist() {
+    // Get the playlist URL from the input field
     const playlistUrl = document.getElementById('playlistInput').value.trim();
     console.log(playlistUrl);
 
-    fetch('http://localhost:3000/api/spotifyData', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ playlistUrl })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Playlist Migration Successful:', data);
-        alert('Playlist migration was successful!');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while migrating the playlist.');
-    });
+    try{
+        const response = await fetch('http://localhost:3000/api/spotifyData', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ playlistUrl })
+        })
+        console.log("Response from backend",response);
+        if(!response.ok){
+            const errorData = await response.json();
+            console.log("Error in response",errorData);
+            alert("Error in migrating playlist: " + errorData.error);
+            return;
+        }
+        else{
+            const data = await response.json();
+            console.log("Data from backend",data.migratedPlaylistUrl);
+            alert("Playlist migrated successfully! .");
+
+            const link  = document.createElement('a');
+            link.href = data.migratedPlaylistUrl;
+            link.target = '_blank';
+            link.textContent = "Go To Your Youtube Playlist";
+            document.querySelector('.resultantUrl').append(link);
+            
+            
+
+        }
+        
+    
+
+    }catch(err){
+        console.log("Error in fetching data from backend",err);
+        alert("something went wrong while fetching data from backend");
+    }
+   
 }

@@ -2,6 +2,7 @@ const getSpotifyAccessToken = require("./SpotifyAccessToken");
 const axios = require('axios')
 
 
+// extractSpotifyPlaylist is a function that fetches the playlist data from Spotify API
 async function extractSpotifyPlaylist (url){
     const accessToken = await getSpotifyAccessToken(); 
     const playlistId = extractPlaylistId(url);
@@ -31,10 +32,12 @@ async function extractSpotifyPlaylist (url){
         
     }
 
-    // 'https://open.spotify.com/playlist/6SAUxRqgv0EdwHHnjBRmoE?si=2hCMcix-Ram6yYcFAWP3Pw'
+   
 
 }
 
+
+// extractPlaylistId is a function that extracts the playlist ID from the Spotify URL
 function extractPlaylistId(url){
     const regex = /playlist\/([a-zA-Z0-9]+)/;
     const match = url.match(regex);

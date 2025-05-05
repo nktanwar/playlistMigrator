@@ -1,6 +1,9 @@
 const axios = require('axios');
 const { google } = require('googleapis');
 
+
+// Function to search for a YouTube video using the YouTube Data API
+// It takes a search string as input and returns the video ID of the first result
 async function searchYoutube(trackInfoString) {
     try {
         const apikey = process.env.YOUTUBE_API_KEY;
@@ -24,7 +27,13 @@ async function searchYoutube(trackInfoString) {
     }
 }
 
-async function CreatePlaylist(oauth2Client) {
+
+// Function to create a new YouTube playlist using the YouTube Data API
+// It takes an OAuth2 client as input and returns the playlist ID of the created playlist
+// The OAuth2 client is used to authenticate the requests to the YouTube API
+// The OAuth2 client is created using the client ID and client secret from the environment variables
+// The redirect URL is the same as the one used during authentication
+async function CreatePlaylist(oauth2Client,title) {
     const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
 
     try {
@@ -32,7 +41,7 @@ async function CreatePlaylist(oauth2Client) {
             part: 'snippet,status',
             requestBody: {
                 snippet: {
-                    title: 'Migrated Playlist',
+                    title: title,//will be changed to the name of the Spotify playlist
                     description: 'Created via Spotify to YouTube migration tool',
                 },
                 status: {
@@ -48,6 +57,12 @@ async function CreatePlaylist(oauth2Client) {
     }
 }
 
+
+
+// Function to insert a video into a YouTube playlist using the YouTube Data API
+// It takes an OAuth2 client, video ID, and playlist ID as input
+// It returns the response data from the API call
+// The OAuth2 client is used to authenticate the requests to the YouTube API
 async function insertToPlaylist(oauth2Client, videoId, playlistId) {
     const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
 
