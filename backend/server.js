@@ -105,6 +105,7 @@ app.get('/', (req, res) => {
   }
 });
 app.get('/check-auth', (req, res) => {
+  console.log('Session Tokens:', req.session.tokens);
   if (req.session.tokens) {
     res.json({ authenticated: true });
   } else {
