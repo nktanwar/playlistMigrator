@@ -9,6 +9,8 @@ const cors = require('cors')
 
 
 const app = express();
+app.set('trust proxy', 1);
+
 app.use(bodyParser.json());
 app.use(cors({
   origin:'https://playlist-migrator-tau.vercel.app',
