@@ -79,14 +79,29 @@ app.get('/oauth2callback', async (req, res) => {
     req.session.tokens = tokens; // Store tokens in session
 
     // Explicitly save session to MongoDB before redirecting
-    req.session.save((err) => {
+      req.session.save((err) => {
       if (err) {
         console.error("❌ Error saving session:", err);
         return res.status(500).send("Session save failed");
       }
 
       console.log("✅ Session saved:", req.session.id);
-      res.redirect('https://playlist-migrator-tau.vercel.app/migration');
+      res.send(`
+        <html>
+          <head>
+            <script>
+              // Wait a bit to ensure the session cookie is stored
+              setTimeout(() => {
+                window.location.href = 'https://playlist-migrator-tau.vercel.app/migration';
+              }, 100);
+            </script>
+          </head>
+          <body>
+            Logging you in...
+          </body>
+        </html>
+      `);
+      
     });
   } catch (error) {
     console.error("❌ OAuth callback error:", error);
@@ -99,6 +114,7 @@ app.get('/oauth2callback', async (req, res) => {
 // Route to check if the user is authenticated
 app.get('/', (req, res) => {
   if (req.session.tokens) {
+   
     res.send('Successfully authenticated with Google!');
   } else {
     res.send('Please authenticate first.');
