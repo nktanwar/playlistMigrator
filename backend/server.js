@@ -46,9 +46,7 @@ app.use(session({
     ttl: 60 * 60 * 24 ,
     stringify: false,
     autoRemove: 'native',
-    crypto: {
-      secret: process.env.SESSION_SECRET
-    }
+   
   }),
   cookie: {
     httpOnly: true,
