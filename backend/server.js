@@ -90,6 +90,8 @@ app.get('/oauth2callback', async (req, res) => {
       }
 
       console.log("✅ Session saved:", req.session.id);
+     
+
       res.send(`
         <html>
           <head>
@@ -126,6 +128,8 @@ app.get('/', (req, res) => {
 });
 app.get('/check-auth', (req, res) => {
   console.log('Session Tokens:', req.session.tokens);
+  console.log('🔍 FULL session:', req.session);
+  console.log('🔍 Headers:', req.headers);
   if (req.session.tokens) {
     res.json({ authenticated: true });
   } else {
