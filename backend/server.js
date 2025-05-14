@@ -128,8 +128,8 @@ app.get('/', (req, res) => {
 });
 app.get('/check-auth', (req, res) => {
   console.log('Session Tokens:', req.session.tokens);
-  console.log('🔍 FULL session:', req.session);
-  console.log('🔍 Headers:', req.headers);
+  // console.log('🔍 FULL session:', req.session);
+  // console.log('🔍 Headers:', req.headers);
   if (req.session.tokens) {
     res.json({ authenticated: true });
   } else {
@@ -138,13 +138,13 @@ app.get('/check-auth', (req, res) => {
 });
 
 
-app.get('/debug-session', (req, res) => {
-  res.json({
-    session: req.session,
-    cookieHeader: req.headers.cookie,
-    sessionId: req.sessionID,
-  });
-});
+// app.get('/debug-session', (req, res) => {
+//   res.json({
+//     session: req.session,
+//     cookieHeader: req.headers.cookie,
+//     sessionId: req.sessionID,
+//   });
+// });
 
 
 
