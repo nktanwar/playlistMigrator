@@ -93,7 +93,7 @@ app.get('/oauth2callback', async (req, res) => {
               // Wait a bit to ensure the session cookie is stored
               setTimeout(() => {
                 window.location.href = 'https://playlist-migrator-tau.vercel.app/migration';
-              }, 100);
+              }, 2000);
             </script>
           </head>
           <body>
