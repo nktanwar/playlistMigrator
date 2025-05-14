@@ -130,6 +130,16 @@ app.get('/check-auth', (req, res) => {
 });
 
 
+app.get('/debug-session', (req, res) => {
+  res.json({
+    session: req.session,
+    cookieHeader: req.headers.cookie,
+    sessionId: req.sessionID,
+  });
+});
+
+
+
 module.exports = oauth2Client; 
 
 
