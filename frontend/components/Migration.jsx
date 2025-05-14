@@ -23,6 +23,7 @@ export default function PlaylistMigrator() {
   const checkAuthStatus = async () => {
     try {
       const res = await fetch('https://playlistmigrator.onrender.com/check-auth', {
+        method: 'GET',
         credentials: 'include'
       });
       const data = await res.json();
