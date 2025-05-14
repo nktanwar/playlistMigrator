@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function PlaylistMigrator() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -7,6 +8,16 @@ export default function PlaylistMigrator() {
   const [resultUrl, setResultUrl] = useState('');
   const [note, setNote] = useState('');
   const [failed, setFailed] = useState([]);
+  
+  // Check if third-party cookies are allowed
+  const checkCookiesEnabled = () => {
+    try {
+      document.cookie = 'testcookie=true; SameSite=None; Secure';
+      return document.cookie.indexOf('testcookie') !== -1;
+    } catch (e) {
+      return false;
+    }
+  };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -27,12 +38,19 @@ export default function PlaylistMigrator() {
         credentials: 'include'
       });
       const data = await res.json();
+      
       if (data.authenticated) {
         setIsAuthenticated(true);
         setStatusMessage('You are logged in! Your playlist will be added to your YouTube account.');
       } else {
         setStatusMessage('Not logged in. The playlist will be created using our account and a link will be provided.');
       }
+
+      // Detect if cookies are blocked and show a message
+      if (!checkCookiesEnabled() && data.authenticated) {
+        setStatusMessage('Cookies are blocked in your browser. Please enable third-party cookies for proper login functionality.');
+      }
+
     } catch (err) {
       console.log('Error checking auth status:', err);
       setStatusMessage('Error checking auth.');
@@ -142,12 +160,6 @@ export default function PlaylistMigrator() {
                 </ul>
               </div>
             )}
-
-
-
-
-
-
           </div>
         )}
       </div>
