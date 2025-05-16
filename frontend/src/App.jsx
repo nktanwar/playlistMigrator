@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Migration from '../components/Migration';
+import Policy from "../components/Policy";
 
 function App() {
   return (
@@ -44,17 +45,23 @@ function App() {
                 <div className="text-sm">
                   <p>For any inquiries, contact the developer:</p>
                   <div className="flex justify-center gap-4 mt-2">
-                    <a href="mailto:developer@example.com" className="text-white hover:underline">Email</a>
-                    <a href="https://github.com/developer" target="_blank" className="text-white hover:underline">GitHub</a>
-                    <a href="https://www.linkedin.com/in/developer" target="_blank" className="text-white hover:underline">LinkedIn</a>
+                    <a href="tester.debug003@gmail.com" className="text-white hover:underline">Email</a>
+                    <a href="https://github.com/nktanwar" target="_blank" className="text-white hover:underline">GitHub</a>
+                    <a href="https://www.linkedin.com/in/pankaj-rana-507078253/" target="_blank" className="text-white hover:underline">LinkedIn</a>
                   </div>
                 </div>
               </div>
+
+              <div className="mt-8 text-center text-sm text-white">
+                <Link to="/policy" className="underline hover:text-gray-200">Privacy Policy</Link>
+              </div>
+
 
             </div>
           }
         />
         <Route path="/migration" element={<Migration />} />
+        <Route path="/policy" element={<Policy />} />
       </Routes>
     </Router>
   );
