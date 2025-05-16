@@ -45,7 +45,7 @@ function App() {
                 <div className="text-sm">
                   <p>For any inquiries, contact the developer:</p>
                   <div className="flex justify-center gap-4 mt-2">
-                    <a href="tester.debug003@gmail.com" className="text-white hover:underline">Email</a>
+                    <a href="mailto:tester.debug003@gmail.com" className="text-white hover:underline">Email</a>
                     <a href="https://github.com/nktanwar" target="_blank" className="text-white hover:underline">GitHub</a>
                     <a href="https://www.linkedin.com/in/pankaj-rana-507078253/" target="_blank" className="text-white hover:underline">LinkedIn</a>
                   </div>
